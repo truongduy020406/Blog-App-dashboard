@@ -1,0 +1,86 @@
+<div class="mt-10 p-10 bg-secondary-color text-center shadow-xl max-w-[900px] mx-auto min-h-[130px]">
+    <div class="mb-5">
+        <h1 class="text-3xl text-primary-color mb-2">{{formStatus}} Category</h1>
+        <p>You can {{formStatus}} a new category from here!</p>
+    </div>
+    <form class="flex justify-center" #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+        <div class="flex flex-row gap-10  min-w-[400px] ">
+            <div class="w-full">
+                <label>
+                    <input
+                        [(ngModel)]="formCategory"
+                        name="category"
+                        class="max-w-[400px] shadow appearance-none border rounded w-full py-3 pl-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        type="text"
+                        placeholder="New category"
+                        #newCategory="ngModel"
+                        required
+                        [ngClass]="{'border-solid border-2 border-red-300':newCategory.touched && newCategory.invalid}"
+                    />
+                </label>
+                <div class="text-red-600" *ngIf="newCategory.touched && newCategory.invalid">
+                    Category field is required
+                </div>
+            </div>
+            
+            <div class="">
+                <button [disabled]="categoryForm.invalid" type="submit" class="disabled:opacity-25 min-w-24 p-3 bg-primary-color text-white rounded-md">
+                    {{formStatus}} category
+                </button>
+            </div>
+            
+
+        </div>
+    </form>
+
+
+
+</div>
+
+
+
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg max-w-[500px] mx-auto mt-10">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 px-4">
+        <thead class="text-xs text-primary-color uppercase bg-secondary-color shadow-sm ">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    STT
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    newCategory
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Active
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class=" border-b border-b-slate-200 hover:bg-gray-50"
+                *ngFor="let category of CategoryArray ; let i = index"
+            >
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                    {{i + 1}}
+                </th>
+                <td class="px-6 py-4">
+                    {{category.data.category}}
+                </td>
+                <td class="px-6 py-4">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        (click)="onEdit(category.data.category , category.id)"
+                    >
+                        Edit
+                    </button>
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3"
+                        (click)="onDelete( category.id)"
+                    >
+                        Delete
+                    </button>
+                </td>
+       
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+
+

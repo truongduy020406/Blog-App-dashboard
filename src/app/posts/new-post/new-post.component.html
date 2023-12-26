@@ -1,0 +1,164 @@
+<div class="container mt-10 ">
+    <div class="my-5 text-center">
+        <h1 class="text-3xl text-primary-color mb-2">Add new Post</h1>
+        <p>You can manager blog from here!</p>
+    </div>
+    <form action="" [formGroup]="postForm" (ngSubmit)="onSubmit()">
+        <div class="grid grid-cols-12 max-[600px]:grid-cols-7 gap-5">
+            <div class="col-span-7 shadow-md  border-solid border-2 p-10 ">
+                <div action="" class="pr-7">
+                    <div >
+                        <label class="block mb-2" >
+                            Title
+                            <input 
+                                formControlName="title"
+                                    (keyup)="onTitelChange($event)"
+                                    name="title"
+                                    class="shadow appearance-none border rounded w-full h-11 py-2 px-3  leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500"  
+                                    type="text"
+                                    [ngClass]="{'border-solid border-2 border-red-300':postForm.get('title')?.touched && postForm.get('title')?.invalid}"
+                                >
+
+                                    <div *ngIf="postForm.get('title')?.errors?.['minlength'] && postForm.get('title')?.errors?.['minlength']?.actualLength < postForm.get('title')?.errors?.['minlength']?.requiredLength">
+                                        <div *ngIf="postForm.get('title')?.touched && postForm.get('title')?.invalid" class="text-red-500">
+                                            Please enter at least 10 characters
+                                        </div>
+                                    </div>
+                                   <div *ngIf="postForm.get('title')?.errors?.['required'] ">
+                                        
+                                        <div *ngIf="postForm.get('title')?.touched && postForm.get('title')?.invalid" class="text-red-500">
+                                            Title is required
+                                        </div>
+                                   </div>  
+
+                        </label>
+                         
+                    </div>
+                    <div class="mt-5">
+                        <label class="block mb-2" >
+                            Permalink
+                            <input 
+                                formControlName="Permalink"
+                                readonly 
+                                class="shadow appearance-none border rounded w-full h-11 py-2 px-3   leading-tight focus:outline-none focus:shadow-outline focus:ring-blue-500 focus:border-blue-500" 
+                                name="Permalink" 
+                                type="text">  
+                            <div *ngIf="postForm.get('Permalink')?.errors?.['required'] ">
+                                
+                                <div *ngIf="postForm.get('Permalink')?.touched && postForm.get('Permalink')?.invalid" class="text-red-500">
+                                    Permalink is required
+                                </div>
+                            </div>  
+                        </label>
+                    </div>
+                    <div class="mt-5">
+                        <label class="block mb-2" >
+                            Excerpt
+                            <textarea 
+                            [ngClass]="{'border-solid border-2 border-red-300':postForm.get('excerpt')?.touched && postForm.get('excerpt')?.invalid}"
+                            formControlName="excerpt"
+                            id="message" rows="10" class="block p-3  w-full    bg-gray-50 rounded-lg border border-gray-300  " placeholder="Write your thoughts here..."></textarea>
+                        
+                            <div *ngIf="postForm.get('excerpt')?.errors?.['minlength'] && postForm.get('excerpt')?.errors?.['minlength']?.actualLength < postForm.get('excerpt')?.errors?.['minlength']?.requiredLength">
+                                <div *ngIf="postForm.get('excerpt')?.touched && postForm.get('excerpt')?.invalid" class="text-red-500">
+                                    Please enter at least 50 characters
+                                </div>
+                            </div>
+                           <div *ngIf="postForm.get('excerpt')?.errors?.['required'] ">
+                                
+                                <div *ngIf="postForm.get('excerpt')?.touched && postForm.get('excerpt')?.invalid" class="text-red-500">
+                                    excerpt is required
+                                </div>
+                           </div>  
+                        
+                        </label>  
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-span-5 shadow-md  border-solid border-2 p-10 max-[600px]:col-span-7 ">
+                <label  class="block mb-2" >Please select Category </label>
+                <div class="pr-7">
+                    <div>
+                      <select 
+                      [ngClass]="{'border-solid border-2 border-red-300':postForm.get('category')?.touched && postForm.get('category')?.invalid}"
+                        id="countries" formControlName="category" class="bg-gray-50 border border-gray-300 mb-2 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                        <option disabled selected value="null">Please select category</option>
+                        <option *ngFor="let category of dataCategory" value="category">
+                          {{ category.data.category }}
+                        </option>
+                      </select>
+                      <div *ngIf="postForm.get('category')?.invalid && postForm.get('category')?.touched" class="text-red-500">
+                        Category is required
+                      </div>
+                    </div>
+                  </div>
+                
+              <div class="img">
+                <label class="block my-2" for="choosefile">Post image</label>
+                <img [src]="imgUrl" alt="" class="mb-5 w-full">
+                <div class="pr-7 " [ngClass]="{'border-solid border-2 border-red-300':postForm.get('postImg')?.touched && postForm.get('postImg')?.invalid}">  
+                    <input 
+                    type="file"
+                    class="block  w-full mb-2 p-3 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none " 
+                    accept="image/*"
+                    (change)="showPreview($event)"
+                    id="choosefile" 
+                    formControlName="postImg"
+                    name="choosefile" 
+                    >
+
+                </div>
+                <div *ngIf="postForm.get('postImg')?.errors?.['required'] && postForm.get('postImg')?.touched" class="text-red-500">
+                    Post Image is required
+                </div>
+                    
+              </div>
+                
+            </div>
+    
+        </div>
+        <div>
+            <div class="mt-5 shadow-md  border-solid border-2 p-10">
+                <div class="pr-6 " [ngClass]="{'border-solid border-2 border-red-300':postForm.get('content')?.touched && postForm.get('content')?.invalid}">
+                    <label class="block mb-2" >
+                        Content
+                     </label>
+                     <angular-editor 
+                     
+                     formControlName="content" [placeholder]="'Enter text here...'" ></angular-editor>
+                     <div *ngIf="postForm.get('content')?.errors?.['required'] ">
+                        <div *ngIf="postForm.get('content')?.touched && postForm.get('content')?.invalid" class="text-red-500">
+                            Content is required
+                        </div>
+                    </div>  
+                    
+                    <div *ngIf="postForm.get('content')?.errors?.['minlength'] && postForm.get('content')?.errors?.['minlength']?.actualLength < postForm.get('content')?.errors?.['minlength']?.requiredLength">
+                        <div *ngIf="postForm.get('content')?.touched && postForm.get('content')?.invalid" class="text-red-500">
+                            Please enter at least 50 characters
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        
+        <div class="flex flex-row gap-5 justify-center mt-10">
+            <button 
+                [disabled]="postForm.invalid"   
+                type="submit" class="disabled:opacity-25 min-w-24 p-3 bg-primary-color text-white rounded-md">
+                Save Post
+            </button>
+            
+            <button 
+                
+                type="submit" class="disabled:opacity-25 min-w-24 p-3 bg-yellow-500 text-white rounded-md">
+                Back to Post
+            </button>
+        </div>      
+    </form>
+
+   
+    
+       
+</div>
