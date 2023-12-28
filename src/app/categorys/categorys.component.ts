@@ -35,14 +35,12 @@ export class CategorysComponent implements OnInit {
   }
 
   onEdit(category:string , id:string){
-    console.log(category)
     this.formCategory = category;
     this.formStatus = 'Edit';
     this.categoryId = id
   }
 
   onDelete(id:string){
-    console.log(id)
     this.categoryService.deteleData(id)
   }
 }

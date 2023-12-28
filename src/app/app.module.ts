@@ -9,6 +9,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage'
 import { environment } from 'src/environments/environment.prod';
 import { CategorysComponent } from './categorys/categorys.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -40,7 +41,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     AngularEditorModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireStorageModule
 
 
   ],

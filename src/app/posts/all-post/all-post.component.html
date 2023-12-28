@@ -1,4 +1,4 @@
-<div class="mt-10 p-10 bg-secondary-color text-center shadow-xl max-w-[900px] mx-auto min-h-[130px]">
+<div class="mt-10 p-10 bg-secondary-color text-center shadow-xl  mx-auto min-h-[130px]">
     <div class="mb-5">
         <h1 class="text-3xl text-primary-color mb-2">All Blog Posts</h1>
         <p>You can manager blog from here!</p>
@@ -18,4 +18,87 @@
     </div>          
 </div>
 
+<div class="max-w-[1000px]">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg  mx-auto mt-10 ">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 px-4">
+            <thead class="text-xs text-primary-color uppercase bg-secondary-color shadow-sm ">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        STT
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Post Image
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Title
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Excerpt
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Category
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Date
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Active
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-b-slate-200 hover:bg-gray-50" *ngFor="let post of dataPost; let i = index">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 ">
+                      {{ i + 1 }}
+                    </th>
+                    <td class="px-6 py-4 w-28 h-24">
+                      <img class="w-full h-full" src="{{ post.data.postImgPath }}" alt="">
+                    </td>
+                    <td class="px-6 py-4 max-w-24 whitespace-normal break-all ">
+                      {{ post.data.title }}
+                    </td>
+                    <td class="px-6 py-4 max-w-[200px] whitespace-normal break-all line-clamp-none">
+                      {{ post.data.excerpt }}
+                    </td>
+                    <td class="px-6 py-4 ">
+                      {{ post.data.category.category }}
+                    </td>
+                    <td class="px-6 py-4 ">
+                      {{ post.data.createdAt.toMillis() | date }}
+                    </td>
+                    <td class="px-6 py-4">
+                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        routerLink="/posts/new" [queryParams]="{ id: post.id }"
+                      >
+                        Edit
+                      </button>
+                      <button 
+                        (click)="ondelete(post.data.postImgPath,post.id)"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3">
+                        Delete
+                      </button>
 
+                        <button  
+                            (click)="onFeatured(post.id , true)"
+                            *ngIf="!post.data.isFeatured"
+                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded ml-3">
+                            Mark Feature
+                        </button>
+
+                        <button 
+                            (click)="onFeatured(post.id , false)"
+                            *ngIf="post.data.isFeatured"
+                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-3">
+                            Remove Feature
+                        </button>
+                    </td>
+                  </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+    
+</div>
