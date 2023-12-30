@@ -1,5 +1,10 @@
 <header class="mx-auto shadow-md">
-    <div class="text-3xl flex items-center justify-center p-9 text-primary-color">
+    <div class="flex items-center justify-around  p-9 text-primary-color">
       <a class="text-5xl">BLOG</a>
+      <div *ngIf="" class="flex gap-4  items-center">
+        <a href="">{{userEmail}}</a>
+        <button (click)="Logout()"  class="bg-secondary-color w-20 h-10 border-2 border-gray-300 hover:bg-primary-color hover:text-white">Logout</button>
+      </div>
     </div>
+    
   </header>

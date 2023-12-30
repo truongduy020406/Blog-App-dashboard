@@ -1,0 +1,54 @@
+<div class="max-w-[400px] p-10 mt-14 mx-auto bg-secondary-color rounded-sm shadow-md">
+        <div class="text-center">
+            <h1 class="text-primary-color">Login</h1>
+            <p>Sign in to your account</p>
+        </div>
+
+        <div class="mt-5">
+            <form action="#"  class="space-y-4 *:pr-7" #loginform="ngForm" (ngSubmit)="onSubmit(loginform.value)">
+                <div >
+                    <label for="email" class="block mb-2  font-medium ">Your email</label>
+                    <input 
+                        ngModel 
+                        #Email="ngModel"
+                        required
+                        pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                        [ngClass]="{'border-solid border-2 border-red-600':Email.touched && Email.invalid}"
+                        type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 m rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3  " placeholder="name@company.com" required="">
+                    
+                    <div *ngIf="Email.touched && Email.invalid">
+                        <div *ngIf="Email.errors?.['required']" class="text-red-600">
+                                Email is required
+                        </div>
+                        <div *ngIf="Email.errors?.['pattern']" class="text-red-600">
+                            Email is email
+                        </div>
+                    </div>
+                
+                </div>
+
+                <div >
+                    <label for="password" class="block mb-2  font-medium ">Your password</label>
+                    <input 
+                        ngModel 
+                        #Password="ngModel"
+                        required
+                        
+                        [ngClass]="{'border-solid border-2 border-red-600':Password.touched && Password.invalid}"
+                        type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 m rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-3  " placeholder="********" required="">
+                    
+                        <div *ngIf="Password.touched && Password.invalid">
+                            <div *ngIf="Password.errors?.['required']" class="text-red-600">
+                                    Password is required
+                            </div>
+                          
+                        </div>
+                </div>
+                <div>
+                    <button type="submit" class="bg-primary-color w-full  text-white text-xl font-bold py-2 px-3   rounded">
+                        Button
+                      </button>
+                </div>
+            </form>
+        </div>
+    </div>

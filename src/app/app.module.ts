@@ -10,6 +10,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage'
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { environment } from 'src/environments/environment.prod';
 import { CategorysComponent } from './categorys/categorys.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -19,6 +21,7 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { NewPostComponent } from './posts/new-post/new-post.component';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './auth/login/login.component';
 
 
 @NgModule({
@@ -29,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     CategorysComponent,
     AllPostComponent,
-    NewPostComponent
+    NewPostComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     AngularEditorModule,
     HttpClientModule,
     ReactiveFormsModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
 
 
   ],
