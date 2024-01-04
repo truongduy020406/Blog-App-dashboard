@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -8,21 +9,25 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  userEmail!:string | null ;
+  userEmail!: string;
   isLoggedin$: Observable<boolean> | undefined;
-  constructor(private auth:AuthService) { }
+
+  constructor(private auth:AuthService , private router:Router) { }
 
   ngOnInit(): void {
-    const userString = localStorage.getItem('user');
-    if(userString){
-       this.userEmail = JSON.parse(userString).email
+    
+    
+    const storedUser = localStorage.getItem('user')
+    if (storedUser) {
+      this.userEmail = JSON.parse(storedUser).email;
+      
     }
-    console.log(this.userEmail)
-
+    setTimeout(()=>{
+      this.isLoggedin$ = this.auth.isLoggedin()
+    },0)
   }
   Logout(){
     this.auth.logout();
-    console.log("ddmmm")
   }
 
 }

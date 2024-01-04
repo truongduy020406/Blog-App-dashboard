@@ -1,0 +1,71 @@
+<div class="mt-10 p-10 bg-secondary-color text-center shadow-xl  mx-auto min-h-[130px]">
+    <div class="mb-5">
+        <h1 class="text-3xl text-primary-color mb-2">All subscribers</h1>
+        <p>You can manager subscribers from here!</p>
+    </div>
+
+   
+    <div class="flex flex-row gap-5 justify-center">
+        <button  routerLink="/"
+            type="submit" class="disabled:opacity-25 min-w-24 p-3 bg-yellow-500 text-white rounded-md">
+            Back to Dashboard
+        </button>
+    </div>          
+</div>
+
+<div class="max-w-[1000px]">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg  mx-auto mt-10 ">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 px-4">
+            <thead class="text-xs text-primary-color uppercase bg-secondary-color shadow-sm ">
+                <tr>
+                    <th scope="col" class="px-6 py-3">
+                        STT
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Name
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Action
+                    </th>
+               
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="border-b border-b-slate-200 hover:bg-gray-50"  *ngFor="let data of dataSub ; let i =index">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 ">
+                        {{i+1}}
+                    </th>
+                    <td class="px-6 py-4 ">
+                     {{data.data.name}}
+                    </td>
+                    <td class="px-6 py-4   ">
+                        {{data.data.email}}
+                    </td>
+                    <td class="px-6 py-4   ">
+                        <button 
+                        (click)="deletesub(data.id)"
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-3">
+                        Delete
+                      </button>
+                    </td>
+                        
+                
+                   
+                      
+                     
+
+                        
+                  
+                  </tr>
+                
+            </tbody>
+        </table>
+    </div>
+    
+    
+    
+    
+</div>
